@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MedTest.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,12 @@ namespace MedTest
         public AddPatientPage()
         {
             InitializeComponent();
+            Loaded += AddPatientPage_Loaded;
+        }
+
+        private void AddPatientPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            DataContext = new AddPatientViewModel();
         }
     }
 }

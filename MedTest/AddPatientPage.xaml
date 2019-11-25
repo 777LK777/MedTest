@@ -10,6 +10,12 @@
         <Style TargetType="TextBlock">
             <Setter Property="Margin" Value="5"/>
         </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="3"/>
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="Margin" Value="3"/>
+        </Style>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -23,7 +29,7 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Имя"/>
-                <TextBox x:Name="PatientFirstNameTbx" Grid.Column="1"/>
+                <TextBox x:Name="PatientFirstNameTbx" Text="{Binding FirstName}" Grid.Column="1"/>
             </Grid>
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -31,7 +37,7 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Фамилия"/>
-                <TextBox x:Name="PatientLastNameTbx" Grid.Column="1"/>
+                <TextBox x:Name="PatientLastNameTbx" Text="{Binding LastName}" Grid.Column="1"/>
             </Grid>
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -39,7 +45,7 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Отчество"/>
-                <TextBox x:Name="PatientPatronymicTbx" Grid.Column="1"/>
+                <TextBox x:Name="PatientPatronymicTbx" Text="{Binding Patronymic}" Grid.Column="1"/>
             </Grid>
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -47,7 +53,7 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Пол"/>
-                <ComboBox x:Name="PatientSexCbx" Grid.Column="1">
+                <ComboBox x:Name="PatientSexCbx" Text="{Binding Sex}" Grid.Column="1">
                     <ComboBoxItem>Мужской</ComboBoxItem>
                     <ComboBoxItem>Женский</ComboBoxItem>
                 </ComboBox>
@@ -58,7 +64,7 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Дата рождения"/>
-                <Calendar x:Name="ForBirthDate" Grid.Column="1"/>
+                <Calendar x:Name="ForBirthDate" DataContext="{Binding BirthDate}" Grid.Column="1"/>
             </Grid>
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -66,7 +72,7 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Адрес проживания"/>
-                <TextBox x:Name="AddressTbx" Grid.Column="1"/>
+                <TextBox x:Name="AddressTbx" Text="{Binding Address}" Grid.Column="1"/>
             </Grid>
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -74,7 +80,7 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Телефон"/>
-                <TextBox x:Name="PhoneTbx" Grid.Column="1"/>
+                <TextBox x:Name="PhoneTbx"  Text="{Binding PhoneNumber}" Grid.Column="1"/>
             </Grid>
         </StackPanel>
         <Button x:Name="SavePatientBtn" Content="Сохранить" Grid.Row="1" Margin="3"/>

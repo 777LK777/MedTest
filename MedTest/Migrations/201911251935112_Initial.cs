@@ -32,7 +32,7 @@ namespace MedTest.Migrations
                         Sex = c.String(nullable: false),
                         BirthDate = c.DateTime(nullable: false),
                         Address = c.String(nullable: false),
-                        TelephoneNumber = c.String(),
+                        PhoneNumber = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
             

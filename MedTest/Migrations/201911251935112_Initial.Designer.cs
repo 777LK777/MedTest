@@ -11,7 +11,7 @@ namespace MedTest.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201911241712295_Initial"; }
+            get { return "201911251935112_Initial"; }
         }
         
         string IMigrationMetadata.Source

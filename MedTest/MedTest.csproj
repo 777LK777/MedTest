@@ -65,12 +65,13 @@
     <Compile Include="AddPatientPage.xaml.cs">
       <DependentUpon>AddPatientPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201911241712295_Initial.cs" />
-    <Compile Include="Migrations\201911241712295_Initial.Designer.cs">
-      <DependentUpon>201911241712295_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201911251935112_Initial.cs" />
+    <Compile Include="Migrations\201911251935112_Initial.Designer.cs">
+      <DependentUpon>201911251935112_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\PatientRepository.cs" />
+    <Compile Include="ViewModel\AddPatientViewModel.cs" />
     <Compile Include="ViewModel\PatientsViewModel.cs" />
     <Page Include="AddPatientPage.xaml">
       <SubType>Designer</SubType>
@@ -107,8 +108,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\201911241712295_Initial.resx">
-      <DependentUpon>201911241712295_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201911251935112_Initial.resx">
+      <DependentUpon>201911251935112_Initial.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

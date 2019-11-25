@@ -12,7 +12,7 @@ namespace MedTest.ViewModel
 {
     class PatientsViewModel : DependencyObject
     {
-        PatientRepository PatientRepo = new PatientRepository(new DataContext());
+        PatientRepository PatientRepo;
                
         public string FilterText
         {
@@ -47,7 +47,9 @@ namespace MedTest.ViewModel
 
         public PatientsViewModel()
         {
+            PatientRepo = new PatientRepository(new DataContext());
             Patients = CollectionViewSource.GetDefaultView(PatientRepo.GetPatients());
+            
         }
 
     }
