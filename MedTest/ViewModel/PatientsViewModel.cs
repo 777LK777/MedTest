@@ -12,7 +12,7 @@ namespace MedTest.ViewModel
 {
     class PatientsViewModel : DependencyObject
     {
-        PatientRepository PatientRepo;
+        readonly IRepository<Patient> patientsRepo;
                
         public string FilterText
         {
@@ -45,10 +45,14 @@ namespace MedTest.ViewModel
         public static readonly DependencyProperty PatientsProperty =
             DependencyProperty.Register("Patients", typeof(ICollectionView), typeof(PatientsViewModel), new PropertyMetadata(null));
 
-        public PatientsViewModel()
+        public PatientsViewModel(IRepository<Patient> repository)
         {
-            PatientRepo = new PatientRepository(new DataContext());
-            Patients = CollectionViewSource.GetDefaultView(PatientRepo.GetPatients());
+            patientsRepo = repository;
+            Patients = CollectionViewSource.GetDefaultView(patientsRepo.GetElements());            
+        }
+
+        public void UpdateViewModel(object obj)
+        {
             
         }
 

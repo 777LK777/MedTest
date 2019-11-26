@@ -11,6 +11,9 @@ namespace MedTest.ViewModel
 {
     class AddPatientViewModel : DependencyObject
     {
+        readonly DependencyObject parentVM;
+        readonly IRepository<Patient> patientsRepo;
+
         public string FirstName
         {
             get { return (string)GetValue(FirstNameProperty); }
@@ -31,8 +34,6 @@ namespace MedTest.ViewModel
         public static readonly DependencyProperty SecondNameProperty =
             DependencyProperty.Register("SecondName", typeof(string), typeof(AddPatientViewModel), new PropertyMetadata(""));
 
-
-
         public string Patronimyc
         {
             get { return (string)GetValue(PatronimycProperty); }
@@ -42,8 +43,6 @@ namespace MedTest.ViewModel
         // Using a DependencyProperty as the backing store for Patronimyc.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty PatronimycProperty =
             DependencyProperty.Register("Patronimyc", typeof(string), typeof(AddPatientViewModel), new PropertyMetadata(""));
-
-
 
         public string Sex
         {
@@ -55,8 +54,6 @@ namespace MedTest.ViewModel
         public static readonly DependencyProperty SexProperty =
             DependencyProperty.Register("Sex", typeof(string), typeof(AddPatientViewModel), new PropertyMetadata(""));
 
-
-
         public DateTime BirthDate
         {
             get { return (DateTime)GetValue(BirthDateProperty); }
@@ -67,9 +64,6 @@ namespace MedTest.ViewModel
         public static readonly DependencyProperty BirthDateProperty =
             DependencyProperty.Register("BirthDate", typeof(DateTime), typeof(AddPatientViewModel), new PropertyMetadata(null));
 
-
-
-
         public string Address
         {
             get { return (string)GetValue(AddressProperty); }
@@ -79,8 +73,6 @@ namespace MedTest.ViewModel
         // Using a DependencyProperty as the backing store for Address.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty AddressProperty =
             DependencyProperty.Register("Address", typeof(string), typeof(AddPatientViewModel), new PropertyMetadata(""));
-
-
 
         public string PhoneNumber
         {
@@ -93,17 +85,10 @@ namespace MedTest.ViewModel
             DependencyProperty.Register("PhoneNumber", typeof(string), typeof(AddPatientViewModel), new PropertyMetadata(""));
 
 
-        public AddPatientViewModel()
+
+        public AddPatientViewModel(IRepository<Patient> repository)
         {
-            
+            patientsRepo = repository;
         }
-
-
-
-
-
-
-
-
     }
 }

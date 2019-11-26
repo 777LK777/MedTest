@@ -70,6 +70,7 @@
       <DependentUpon>201911251935112_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Model\IRepository.cs" />
     <Compile Include="Model\PatientRepository.cs" />
     <Compile Include="ViewModel\AddPatientViewModel.cs" />
     <Compile Include="ViewModel\PatientsViewModel.cs" />

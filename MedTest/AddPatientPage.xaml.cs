@@ -1,4 +1,5 @@
-﻿using MedTest.ViewModel;
+﻿using MedTest.Model;
+using MedTest.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,15 +21,23 @@ namespace MedTest
     /// </summary>
     public partial class AddPatientPage : Window
     {
-        public AddPatientPage()
+        IRepository<Patient> patientsRepository;
+
+        public AddPatientPage(IRepository<Patient> repository)
         {
             InitializeComponent();
             Loaded += AddPatientPage_Loaded;
+            patientsRepository = repository;
         }
 
         private void AddPatientPage_Loaded(object sender, RoutedEventArgs e)
         {
-            DataContext = new AddPatientViewModel();
+            DataContext = new AddPatientViewModel(patientsRepository);
+        }
+
+        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+
         }
     }
 }

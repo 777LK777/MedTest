@@ -8,18 +8,22 @@ using System.Threading.Tasks;
 
 namespace MedTest.Model
 {
-    public class PatientRepository
+    public class PatientRepository : IRepository<Patient>
     {
-        private readonly DbSet<Patient> patients;
+        private readonly DataContext data;
 
-        public BindingList<Patient> GetPatients()
+        public event Action<object> EventAddElement;
+
+        public BindingList<Patient> GetElements()
         {
-            return patients.Local.ToBindingList();
+            return data.Patients.Local.ToBindingList();
         }
 
-        public void AddPatient(Patient patient)
+        public void AddElement(Patient patient)
         {
-            throw new NotImplementedException();
+            data.Patients.Add(patient);
+            data.SaveChanges();
+            EventAddElement?.Invoke(this);
         }
 
         public void RemovePatient(Patient patient)
@@ -34,8 +38,7 @@ namespace MedTest.Model
 
         public PatientRepository(DataContext ctx)
         {
-            patients = ctx.Patients;
-            patients.Load();
+            data = ctx;
         }
     }
 }

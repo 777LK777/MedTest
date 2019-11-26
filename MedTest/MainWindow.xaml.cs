@@ -22,20 +22,27 @@ namespace MedTest
     /// </summary>
     public partial class MainWindow : Window
     {
+        DataContext data;
+        PatientRepository patientRepository;
+
         public MainWindow()
         {
             InitializeComponent();
+            data = new DataContext();
             Loaded += MainWindow_Loaded;
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            DataContext = new PatientsViewModel();
+            patientRepository = new PatientRepository(data);
+            var viewModel = new PatientsViewModel(patientRepository);
+            patientRepository.EventAddElement += viewModel.UpdateViewModel;
+            DataContext = viewModel;
         }
         
         private void AddPatientBtn_Click(object sender, RoutedEventArgs e)
         {
-            AddPatientPage patientPage = new AddPatientPage();
+            AddPatientPage patientPage = new AddPatientPage(patientRepository);
             patientPage.ShowDialog();
         }
     }

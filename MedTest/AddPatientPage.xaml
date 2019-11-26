@@ -17,6 +17,9 @@
             <Setter Property="Margin" Value="3"/>
         </Style>
     </Window.Resources>
+    <Window.CommandBindings>
+        <!--<CommandBinding Command="SavePatient" Executed="PatientSave_Executed"/>-->
+    </Window.CommandBindings>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -83,6 +86,10 @@
                 <TextBox x:Name="PhoneTbx"  Text="{Binding PhoneNumber}" Grid.Column="1"/>
             </Grid>
         </StackPanel>
-        <Button x:Name="SavePatientBtn" Content="Сохранить" Grid.Row="1" Margin="3"/>
+        <Button x:Name="SavePatientBtn" Command="SavePatient"  Content="Сохранить" Grid.Row="1" Margin="3">
+            <Button.CommandBindings>
+                <CommandBinding Command="Save" Executed="PatientSave_Executed"/>
+            </Button.CommandBindings>
+        </Button>
     </Grid>
 </Window>
