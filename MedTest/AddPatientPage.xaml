@@ -3,10 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MedTest"
+        xmlns:local="clr-namespace:MedTest.ViewModel"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Title="AddPatientPage" Height="450" Width="800">
     <Window.Resources>
+        <local:AddPatientViewModel x:Key="addBtn"/>
         <Style TargetType="TextBlock">
             <Setter Property="Margin" Value="5"/>
         </Style>
@@ -16,10 +18,9 @@
         <Style TargetType="ComboBox">
             <Setter Property="Margin" Value="3"/>
         </Style>
+        
     </Window.Resources>
-    <Window.CommandBindings>
-        <!--<CommandBinding Command="SavePatient" Executed="PatientSave_Executed"/>-->
-    </Window.CommandBindings>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -32,7 +33,7 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Имя"/>
-                <TextBox x:Name="PatientFirstNameTbx" Text="{Binding FirstName}" Grid.Column="1"/>
+                <TextBox x:Name="PatientFirstNameTbx" Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"/>
             </Grid>
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -57,8 +58,8 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Пол"/>
                 <ComboBox x:Name="PatientSexCbx" Text="{Binding Sex}" Grid.Column="1">
-                    <ComboBoxItem>Мужской</ComboBoxItem>
-                    <ComboBoxItem>Женский</ComboBoxItem>
+                    <ComboBoxItem>МУЖСКОЙ</ComboBoxItem>
+                    <ComboBoxItem>ЖЕНСКИЙ</ComboBoxItem>
                 </ComboBox>
             </Grid>
             <Grid>
@@ -67,7 +68,13 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Дата рождения"/>
-                <Calendar x:Name="ForBirthDate" DataContext="{Binding BirthDate}" Grid.Column="1"/>
+                <DatePicker x:Name="ForBirthDate"
+                            
+                            SelectedDate="{Binding BirthDate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"                            
+                            DisplayDate="{x:Static sys:DateTime.Now}"
+                            Grid.Column="1" DisplayDateEnd="{x:Static sys:DateTime.Now}">
+                    
+                </DatePicker>
             </Grid>
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -86,10 +93,6 @@
                 <TextBox x:Name="PhoneTbx"  Text="{Binding PhoneNumber}" Grid.Column="1"/>
             </Grid>
         </StackPanel>
-        <Button x:Name="SavePatientBtn" Command="SavePatient"  Content="Сохранить" Grid.Row="1" Margin="3">
-            <Button.CommandBindings>
-                <CommandBinding Command="Save" Executed="PatientSave_Executed"/>
-            </Button.CommandBindings>
-        </Button>
+        <Button x:Name="SavePatientBtn" Command="{Binding MyCommand, Source={StaticResource addBtn}}"  Content="Сохранить" Grid.Row="1" Margin="3"/>
     </Grid>
 </Window>

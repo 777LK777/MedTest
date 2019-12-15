@@ -73,6 +73,7 @@
     <Compile Include="Model\IRepository.cs" />
     <Compile Include="Model\PatientRepository.cs" />
     <Compile Include="ViewModel\AddPatientViewModel.cs" />
+    <Compile Include="ViewModel\Command.cs" />
     <Compile Include="ViewModel\PatientsViewModel.cs" />
     <Page Include="AddPatientPage.xaml">
       <SubType>Designer</SubType>

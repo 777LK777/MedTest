@@ -6,14 +6,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace MedTest.ViewModel
 {
-    class AddPatientViewModel : DependencyObject
+    public class AddPatientViewModel : DependencyObject
     {
-        readonly DependencyObject parentVM;
-        readonly IRepository<Patient> patientsRepo;
+        //static List<string> BannedSimbols = new List<string>
+        //{
+        //    ".",
+        //    ",",
+        //    "/",
+        //    "*",
+        //    "+",
+        //    "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"
+        //};
 
+        public ICommand MyCommand { get; set; }   
+
+        #region First Name
         public string FirstName
         {
             get { return (string)GetValue(FirstNameProperty); }
@@ -22,8 +34,19 @@ namespace MedTest.ViewModel
 
         // Using a DependencyProperty as the backing store for Name.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty FirstNameProperty =
-            DependencyProperty.Register("FirstName", typeof(string), typeof(AddPatientViewModel), new PropertyMetadata(""));
+            DependencyProperty.Register("FirstName", typeof(string), typeof(AddPatientViewModel), new PropertyMetadata("", FirstName_Changed));
 
+        private static void FirstName_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var vm = d as AddPatientViewModel;
+            if (vm != null)
+            {
+                vm.FirstName = vm.FirstName.ToUpper();
+            }
+        }
+        #endregion
+
+        #region Second Name
         public string SecondName
         {
             get { return (string)GetValue(SecondNameProperty); }
@@ -32,8 +55,19 @@ namespace MedTest.ViewModel
 
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SecondNameProperty =
-            DependencyProperty.Register("SecondName", typeof(string), typeof(AddPatientViewModel), new PropertyMetadata(""));
+            DependencyProperty.Register("SecondName", typeof(string), typeof(AddPatientViewModel), new PropertyMetadata("", SecondName_Changed));
 
+        private static void SecondName_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var vm = d as AddPatientViewModel;
+            if (vm != null)
+            {
+                vm.SecondName = vm.SecondName.ToUpper();
+            }
+        }
+        #endregion
+
+        #region Patronimyc
         public string Patronimyc
         {
             get { return (string)GetValue(PatronimycProperty); }
@@ -42,8 +76,19 @@ namespace MedTest.ViewModel
 
         // Using a DependencyProperty as the backing store for Patronimyc.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty PatronimycProperty =
-            DependencyProperty.Register("Patronimyc", typeof(string), typeof(AddPatientViewModel), new PropertyMetadata(""));
+            DependencyProperty.Register("Patronimyc", typeof(string), typeof(AddPatientViewModel), new PropertyMetadata("", Patronimyc_Changed));
 
+        private static void Patronimyc_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var vm = d as AddPatientViewModel;
+            if (vm != null)
+            {
+                vm.Patronimyc = vm.Patronimyc.ToUpper();
+            }
+        }
+        #endregion
+
+        #region Sex
         public string Sex
         {
             get { return (string)GetValue(SexProperty); }
@@ -52,18 +97,28 @@ namespace MedTest.ViewModel
 
         // Using a DependencyProperty as the backing store for Sex.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SexProperty =
-            DependencyProperty.Register("Sex", typeof(string), typeof(AddPatientViewModel), new PropertyMetadata(""));
+            DependencyProperty.Register("Sex", typeof(string), typeof(AddPatientViewModel), new PropertyMetadata("МУЖСКОЙ"));
+        #endregion
 
-        public DateTime BirthDate
+        #region Birth Date
+        public DateTime? BirthDate
         {
-            get { return (DateTime)GetValue(BirthDateProperty); }
-            set { SetValue(BirthDateProperty, value); }
+            get { return (DateTime?)GetValue(BirthDateProperty); }
+            set
+            {
+                if(BirthDate != value)
+                {
+                    SetValue(BirthDateProperty, value);
+                }                
+            }
         }
 
         // Using a DependencyProperty as the backing store for BirthDate.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty BirthDateProperty =
-            DependencyProperty.Register("BirthDate", typeof(DateTime), typeof(AddPatientViewModel), new PropertyMetadata(null));
+            DependencyProperty.Register("BirthDate", typeof(DateTime?), typeof(AddPatientViewModel), new PropertyMetadata(DateTime.Now));
+        #endregion
 
+        #region Address
         public string Address
         {
             get { return (string)GetValue(AddressProperty); }
@@ -73,7 +128,9 @@ namespace MedTest.ViewModel
         // Using a DependencyProperty as the backing store for Address.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty AddressProperty =
             DependencyProperty.Register("Address", typeof(string), typeof(AddPatientViewModel), new PropertyMetadata(""));
+        #endregion
 
+        #region Phone number
         public string PhoneNumber
         {
             get { return (string)GetValue(PhoneNumberProperty); }
@@ -85,10 +142,7 @@ namespace MedTest.ViewModel
             DependencyProperty.Register("PhoneNumber", typeof(string), typeof(AddPatientViewModel), new PropertyMetadata(""));
 
 
-
-        public AddPatientViewModel(IRepository<Patient> repository)
-        {
-            patientsRepo = repository;
-        }
+        #endregion
+        
     }
 }

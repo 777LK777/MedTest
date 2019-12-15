@@ -22,6 +22,7 @@ namespace MedTest
     public partial class AddPatientPage : Window
     {
         IRepository<Patient> patientsRepository;
+        AddPatientViewModel MyVM;
 
         public AddPatientPage(IRepository<Patient> repository)
         {
@@ -32,12 +33,15 @@ namespace MedTest
 
         private void AddPatientPage_Loaded(object sender, RoutedEventArgs e)
         {
-            DataContext = new AddPatientViewModel(patientsRepository);
+            MyVM = new AddPatientViewModel();
+            
+            MyVM.MyCommand = new Command(x => { MessageBox.Show(MyVM.FirstName); }, y => { return true; });
+
+            DataContext = MyVM;
+            MyVM.MyCommand.Execute(null);
+
         }
 
-        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-
-        }
+        
     }
 }
